@@ -8,6 +8,9 @@ build:
 	rm -rf dist
 	npm run build
 
+watch:
+	npm run watch
+
 test:
 	npm test
 

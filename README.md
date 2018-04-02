@@ -5,4 +5,4 @@
 ## Installation
  `$ npm install -g gendiff_vk`
 ## Run
- `$ gendiff_vk`
+ `$ gendiff_vk <firstConfig> <secondConfig>`
