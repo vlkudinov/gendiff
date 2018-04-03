@@ -1,6 +1,6 @@
 {
   "name": "gendiff_vk",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "",
   "main": "index.js",
   "author": "Vladimir Kudinov",
@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "commander": "^2.15.1",
+    "ini": "^1.3.5",
     "js-yaml": "^3.11.0",
     "lodash": "^4.17.5"
   },
