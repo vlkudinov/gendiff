@@ -41,3 +41,10 @@ test('compare xml', () => {
   expect(() => gendiff(path1, path2)).toThrowError('unkown format: .xml');
 });
 
+test('compare nested json', () => {
+  const path1 = `${dir}/json/before.nested.json`;
+  const path2 = `${dir}/json/after.nested.json`;
+  const expected = fs.readFileSync(`${dir}/expected.nested.txt`, 'utf8');
+  const current = gendiff(path1, path2);
+  expect(current).toBe(expected);
+});
