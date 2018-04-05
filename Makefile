@@ -12,7 +12,7 @@ watch:
 	npm run watch
 
 test:
-	npm run test -- --watchAll
+	npm run test
 
 lint:
 	npm run eslint .
