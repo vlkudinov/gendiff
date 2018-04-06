@@ -12,7 +12,7 @@ watch:
 	npm run watch
 
 test:
-	npm run test
+	npm run test --no-color
 
 lint:
 	npm run eslint .

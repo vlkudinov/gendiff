@@ -111,3 +111,11 @@ test('compare nested ini --plain', () => {
   const expected = fs.readFileSync(`${fixturesPath}/expected.plain.txt`, 'utf8');
   expect(current).toBe(expected);
 });
+
+test('compare json --json', () => {
+  const path1 = `${fixturesPath}/json/before.nested.json`;
+  const path2 = `${fixturesPath}/json/after.nested.json`;
+  const current = gendiff(path1, path2, 'json');
+  const expected = fs.readFileSync(`${fixturesPath}/expected.json`, 'utf8');
+  expect(current).toBe(expected);
+});
