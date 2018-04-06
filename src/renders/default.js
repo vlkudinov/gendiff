@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import colors from 'colors';
 
 const makeIndent = count => `${'  '.repeat(count * 2)}`;
 
@@ -12,18 +13,15 @@ const renderObj = (value, depth) => {
 
 const propertyActions = {
   nested: (elem, depth, render) => `${makeIndent(depth)}    ${elem.key}: ${render(elem.children, depth + 1)}`,
-  added: (elem, depth) => `${makeIndent(depth)}  + ${elem.key}: ${renderObj(elem.value, depth)}`,
-  deleted: (elem, depth) => `${makeIndent(depth)}  - ${elem.key}: ${renderObj(elem.value, depth)}`,
-  updated: (elem, depth) => [`${makeIndent(depth)}  + ${elem.key}: ${renderObj(elem.value[1], depth)}`,
-    `${makeIndent(depth)}  - ${elem.key}: ${renderObj(elem.value[0], depth)}`],
+  added: (elem, depth) => `${makeIndent(depth)}  ${colors.green(`+ ${elem.key}: ${renderObj(elem.value, depth)}`)}`,
+  deleted: (elem, depth) => `${makeIndent(depth)}  ${colors.red(`- ${elem.key}: ${renderObj(elem.value, depth)}`)}`,
+  updated: (elem, depth) => [`${makeIndent(depth)}  ${colors.green(`+ ${elem.key}: ${renderObj(elem.newValue, depth)}`)}`,
+    `${makeIndent(depth)}  ${colors.red(`- ${elem.key}: ${renderObj(elem.oldValue, depth)}`)}`],
   unchanged: (elem, depth) => `${makeIndent(depth)}    ${elem.key}: ${renderObj(elem.value, depth)}`,
 };
 
 const render = (ast, depth = 0) => {
-  const result = _.flatten(ast.map((elem) => {
-    const method = propertyActions[elem.type];
-    return method(elem, depth, render);
-  })).join('\n');
+  const result = _.flatten(ast.map(elem => propertyActions[elem.type](elem, depth, render))).join('\n');
   return `{\n${result}\n${makeIndent(depth)}}`;
 };
 

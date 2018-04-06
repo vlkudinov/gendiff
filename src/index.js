@@ -27,7 +27,9 @@ const propertyActions = [
     type: 'updated',
     check: (firstFile, secondFile) => firstFile !== secondFile,
     make: (key, type, firstFile, secondFile) =>
-      ({ key, type: 'updated', value: [firstFile, secondFile] }),
+      ({
+        key, type: 'updated', oldValue: firstFile, newValue: secondFile,
+      }),
   },
   {
     type: 'unchanged',
